@@ -2,6 +2,7 @@ using Moq;
 using Something.Application;
 using Something.Domain;
 using Something.Persistence;
+using Something.Security;
 using SomethingTests.Infrastructure.Factories;
 using System.Collections.Generic;
 using System.Linq;
@@ -132,6 +133,15 @@ namespace SomethingTests
             List<Domain.Something> somethingList1 = interactor.GetSomethingList();
             Assert.Equal(somethingList.Count, somethingList1.Count);
             Assert.Equal(somethingList[somethingList.Count - 1].Name, somethingList1[somethingList1.Count - 1].Name);
+        }
+        [Fact]
+        public void UserManager_GetUserPrinciple_ReturnsUserPrinciple()
+        {
+            var userManager = new SomethingUserManager();
+            
+            var actual = userManager.GetUserPrinciple();
+
+            Assert.IsType< System.Security.Claims.ClaimsPrincipal>(actual);
         }
     }
 }

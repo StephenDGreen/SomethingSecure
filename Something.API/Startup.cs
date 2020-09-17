@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Something.Security;
 using Something.Application;
 using Something.Domain;
 using Something.Persistence;
@@ -37,6 +38,7 @@ namespace Something.API
             services.AddScoped<ISomethingCreateInteractor, SomethingCreateInteractor>();
             services.AddScoped<ISomethingReadInteractor, SomethingReadInteractor>();
             services.AddScoped<ISomethingPersistence, SomethingPersistence>();
+            services.AddSingleton<ISomethingUserManager, SomethingUserManager>();
             services.AddControllers();
         }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
