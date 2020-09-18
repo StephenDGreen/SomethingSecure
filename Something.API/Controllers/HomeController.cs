@@ -9,7 +9,8 @@ using System.Threading.Tasks;
 namespace Something.API.Controllers
 {
     [Authorize]
-    public class HomeController : Controller
+    [ApiController]
+    public class HomeController : ControllerBase
     {
         private readonly AppDbContext ctx;
         private readonly ISomethingUserManager userManager;
@@ -25,6 +26,7 @@ namespace Something.API.Controllers
         }
 
         [AllowAnonymous]
+        [Route("home/authenticate")]
         public async Task<IActionResult> Authenticate()
         {
             await HttpContext.SignInAsync(userManager.GetUserPrinciple());
